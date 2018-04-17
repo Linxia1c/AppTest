@@ -3,6 +3,7 @@ package com.example.apptest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,11 +65,35 @@ public class FirstActivity extends AppCompatActivity {
 //                intent = new Intent(FirstActivity.this,SecondActivity.class);
 //                startActivity(intent);
                 //隐式
-                intent = new Intent("com.example.ACTION_STAR");
-                startActivity(intent);
+//                intent = new Intent("com.example.ACTION_STAR");
+//                startActivity(intent);
 //                finish();//test销毁
+//                String data = "Hellow Second";
+//                intent = new Intent(FirstActivity.this,SecondActivity.class);
+//                intent.putExtra("extra_data",data);
+//                startActivity(intent);
+                intent = new Intent(FirstActivity.this, SecondActivity.class);
+                startActivityForResult(intent, 1);
                 Toast.makeText(FirstActivity.this, "View-Onclick", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    /**
+     * @time 2018/4/17  19:39
+     * @describe Result
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    String data1 = data.getStringExtra("extra_data");
+                    Log.d("extra_data", data1);
+                }
+                break;
+            default:
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
